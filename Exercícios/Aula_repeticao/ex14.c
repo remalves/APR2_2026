@@ -23,7 +23,10 @@ int main()
 
     for (i = 1; i <= ALUNOS; i++)
     {
-        printf("Aluno %d: \n", i);
+        if(i == 1)
+            printf("Aluno %d: \n", i);
+        else
+            printf("\nAluno %d: \n", i);
 
         soma_notas_aluno = 0;
 
@@ -34,23 +37,40 @@ int main()
             {
                 printf("Nota %d: \n", j);
                 scanf("%f", &nota_Aluno);
-                soma_notas_aluno += nota_Aluno;
-
             } while (nota_Aluno < 0 || nota_Aluno > 10);
+
+            soma_notas_aluno += nota_Aluno;
+        }
+        media_aluno = soma_notas_aluno / QTD_NOTAS;
+        printf("A média do aluno %d = %.2f\n", i, media_aluno);
+
+        if(media_aluno >=6 && media_aluno <=10)
+        {
+            printf("Aluno APROVADO\n");
+        }
+        else if(media_aluno >= 4 && media_aluno <= 5.99)
+        {
+            printf("Aluno de IFA\n");
+        }
+        else
+        {
+            printf("Aluno reprovado\n");
         }
 
-        media_aluno = soma_notas_aluno / QTD_NOTAS;
+        if (media_aluno == 1) //O primeiro aluno vira minha referência.
+        {
+            maior_media = media_aluno; //Depois disso, só troco se aparecer alguém com média maior
+        }
+        else //Depois disso, só troco se aparecer alguém com média maior
+        {
+            if (media_aluno > maior_media)
+            {
+                maior_media = media_aluno;
+            }
+        }
+    }
 
-        printf("A média do aluno %d = %.2f\n", i, media_aluno);
-        
-        maior_media = media_aluno;
-    }
-    
-    if (maior_media < media_aluno)
-    {
-        maior_media = media_aluno;
-    }
-    printf("Maior média da turma = %.2f", maior_media);
+    printf("\nMaior média da turma = %.2f\n", maior_media);
 
     return 0;
 }
